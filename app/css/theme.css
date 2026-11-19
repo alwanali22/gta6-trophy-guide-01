@@ -1,69 +1,43 @@
-/* "Vice dusk": deep purple-blue night, amber sunset accents, warm white text. */
-:root {
-  --bg: #171226;
-  --bg-soft: #211a38;
-  --panel: #251d40;
-  --panel-2: #2e2450;
-  --line: #453a6e;
-  --text: #f5efe4;
-  --muted: #c9bfe8;
-  --amber: #ffb454;
-  --amber-deep: #ff8a3d;
-  --coral: #ff7a6b;
-  --green: #7ddba3;
-  --platinum: #e8f4ff;
-  --gold: #ffd75e;
-  --silver: #d7dce6;
-  --bronze: #e0a071;
-}
-body { background: var(--bg); color: var(--text); }
-.masthead { background: linear-gradient(120deg, #2a1745 0%, #171226 55%, #3d1f2e 100%); border-bottom: 3px solid var(--amber); }
-.mast-title h1 { color: var(--amber); font-family: Georgia, "Times New Roman", serif; }
-.subtitle { color: var(--muted); }
-.composition { color: var(--amber); }
-.big-progress { color: var(--text); }
-.big-progress #progressPct { color: var(--amber); }
-.progress-bar { background: #0f0b1c; border: 1px solid var(--line); }
-.progress-bar > div { background: linear-gradient(90deg, var(--amber-deep), var(--amber)); }
-.progress-note { color: var(--muted); }
-.tabs { background: var(--bg); }
-.tabs button { background: var(--bg-soft); color: var(--muted); border-color: var(--line); }
-.tabs button.active { background: var(--amber); color: #241505; border-color: var(--amber); }
-.toolbar { background: var(--bg-soft); border-bottom: 1px solid var(--line); }
-.toolbar input[type="search"], .toolbar select { background: #120d20; color: var(--text); border-color: var(--line); }
-.trophy-row { background: var(--panel); border: 1px solid var(--line); }
-.trophy-row:hover { border-color: var(--amber); }
-.trophy-row.selected { border-color: var(--amber); box-shadow: 0 0 0 1px var(--amber); }
-.trophy-row.earned { opacity: 0.72; }
-.trophy-row .tdesc { color: var(--muted); }
-.chip { background: #120d20; color: var(--muted); border: 1px solid var(--line); }
-.chip.missable { background: #4a1d12; color: #ffb59a; border-color: #8a3a22; }
-.chip.counter { background: #12351f; color: var(--green); border-color: #2c6b44; }
-.chip.kind-story { color: #ffd9a0; }
-.chip.kind-collectibles { color: #a8d8ff; }
-.chip.kind-activities { color: #c3f0c3; }
-.grade-badge.platinum { background: var(--platinum); color: #1c2a44; }
-.grade-badge.gold { background: var(--gold); color: #4a3200; }
-.grade-badge.silver { background: var(--silver); color: #333a48; }
-.grade-badge.bronze { background: var(--bronze); color: #40220a; }
-.detail { background: var(--panel-2); border: 1px solid var(--amber); }
-.detail h3 { color: var(--amber); }
-.detail .grade-line { color: var(--amber); }
-.detail .official { color: var(--muted); }
-.detail .sources { color: var(--muted); }
-.counter-box input, .detail textarea { background: #120d20; color: var(--text); border-color: var(--line); }
-.counter-box button { background: var(--amber); color: #241505; border: none; }
-.missable-flag { background: #4a1d12; color: #ffb59a; }
-.stage-card { background: var(--panel); border: 1px solid var(--line); }
-.stage-card .stage-sub { color: var(--muted); }
-.miss-row, .next-row { background: var(--panel); border: 1px solid var(--line); }
-.miss-row .basis, .next-row .why { color: var(--muted); }
-.next-row .rank { color: var(--amber); }
-.save-card { background: var(--panel); border: 1px solid var(--line); }
-.save-card button { background: var(--amber); color: #241505; border: none; }
-.save-card h3 { color: var(--amber); }
-.export-preview { background: #120d20; color: var(--green); border: 1px solid var(--line); }
-.import-status { color: var(--green); }
-.save-card button.danger { background: transparent; color: var(--coral); border: 1px solid var(--coral); }
-.empty { color: var(--muted); }
-footer { color: var(--muted); }
+/* Vice dusk: deep purple-blue night, amber sunset accent, warm white text. */
+body { background: #171226; color: #f5efe4; }
+.masthead { background: linear-gradient(135deg, #241a3d 0%, #171226 55%, #3d1e2e 100%); border-bottom: 3px solid #f5a623; }
+.kicker { color: #f5a623; }
+h1 { color: #fff7e8; }
+.sub { color: #d8cfe0; }
+.makeup { color: #f5a623; }
+.big-count { color: #ffb347; }
+.big-pct { color: #f5a623; }
+.big-bar { background: #33294d; }
+.big-bar span { background: #f5a623; }
+.tab { color: #cfc4dd; }
+.tab.active { background: #f5a623; color: #241505; }
+.controls { background: #1e1830; border-bottom: 1px solid #33294d; }
+.controls input[type="search"], .controls select { background: #241d3a; color: #f5efe4; border-color: #4a3d6b; }
+.controls label { color: #d8cfe0; }
+.trow { background: #221a38; border-color: #3d3358; }
+.trow:hover { border-color: #f5a623; }
+.trow.earned { opacity: 0.62; }
+.trow.earned .tname { text-decoration: line-through; }
+.tdesc { color: #c9bdd6; }
+.chip { background: #2e2447; color: #ffd98a; border-color: #57467e; }
+.chip.missable { background: #5c1f1f; color: #ffb3a3; border-color: #8a3a2e; }
+.detail { background: #241c3d; border-color: #f5a623; }
+.detail .grade-line { color: #ffd98a; }
+.detail .sources { color: #ffb347; }
+.detail ol li { color: #efe6d8; }
+.counter-row input, .note-row textarea { background: #171226; color: #f5efe4; border-color: #57467e; }
+.basis { background: #3d1e2e; color: #ffd2c2; }
+.stage { background: #221a38; border-color: #3d3358; }
+.stage .stage-meta { color: #ffd98a; }
+.stage-bar { background: #33294d; }
+.stage-bar span { background: #f5a623; }
+.platinum-card { background: linear-gradient(135deg, #3d2c12, #241a3d); border: 1px solid #f5a623; }
+.miss-row, .next-row { background: #221a38; border-color: #3d3358; }
+.next-row .why { color: #ffd98a; }
+.save-panel { background: #221a38; border-color: #3d3358; }
+.save-panel button { background: #f5a623; color: #241505; border-color: #f5a623; }
+.save-panel button.secondary { background: transparent; color: #ffd98a; border-color: #f5a623; }
+#importStatus { color: #8be08b; }
+#exportPreview { background: #120e1e; color: #d8cfe0; }
+.empty-note { color: #c9bdd6; }
+footer { color: #9a8fb0; }

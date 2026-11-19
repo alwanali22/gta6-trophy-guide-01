@@ -1,70 +1,77 @@
-// Progress state in localStorage: earned ids, per-trophy counters, per-trophy notes, spoiler setting.
-export const STATE_KEY = 'sunset-platinum-v1';
+// Progress saved in the browser (localStorage), exportable and importable.
+export const STORAGE_KEY = 'sunset-platinum-v1';
+export const APP_NAME = 'sunset-platinum';
 
-export function defaultState() {
-  return { earned: [], counts: {}, notes: {}, spoiler: true };
+export function blankState() {
+  return { earned: {}, counters: {}, notes: {}, spoiler: true };
 }
 
 export function loadState() {
   try {
-    const raw = localStorage.getItem(STATE_KEY);
-    if (!raw) return defaultState();
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return blankState();
     const parsed = JSON.parse(raw);
-    return {
-      earned: Array.isArray(parsed.earned) ? parsed.earned : [],
-      counts: parsed.counts && typeof parsed.counts === 'object' ? parsed.counts : {},
-      notes: parsed.notes && typeof parsed.notes === 'object' ? parsed.notes : {},
-      spoiler: parsed.spoiler !== false,
-    };
+    const state = blankState();
+    if (parsed && typeof parsed === 'object') {
+      if (parsed.earned) state.earned = parsed.earned;
+      if (parsed.counters) state.counters = parsed.counters;
+      if (parsed.notes) state.notes = parsed.notes;
+      if (typeof parsed.spoiler === 'boolean') state.spoiler = parsed.spoiler;
+    }
+    return state;
   } catch {
-    return defaultState();
+    return blankState();
   }
 }
 
 export function saveState(state) {
-  localStorage.setItem(STATE_KEY, JSON.stringify(state));
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
 }
 
-export function isEarned(state, id) {
-  return state.earned.includes(id);
+export function earnedCount(state) {
+  return Object.values(state.earned).filter(Boolean).length;
 }
 
-export function toggleEarned(state, id) {
-  const at = state.earned.indexOf(id);
-  if (at === -1) state.earned.push(id);
-  else state.earned.splice(at, 1);
-  saveState(state);
+export function exportPayload(state) {
+  return {
+    app: APP_NAME,
+    version: 1,
+    earned: state.earned,
+    counters: state.counters,
+    notes: state.notes,
+    spoiler: state.spoiler,
+  };
 }
 
-export function setCount(state, id, value) {
-  const n = Math.max(0, Math.floor(Number(value) || 0));
-  state.counts[id] = n;
-  saveState(state);
-  return n;
+export function exportText(state) {
+  return JSON.stringify(exportPayload(state), null, 2);
 }
 
-export function getCount(state, id) {
-  return state.counts[id] || 0;
+export function downloadExport(state) {
+  const blob = new Blob([exportText(state)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = 'sunset-platinum-progress.json';
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
-export function setNote(state, id, text) {
-  if (text.trim()) state.notes[id] = text.trim();
-  else delete state.notes[id];
-  saveState(state);
-}
-
-export function exportProgress(state) {
-  return JSON.stringify({ app: 'sunset-platinum', version: 1, exportedAt: new Date().toISOString(), state }, null, 2);
-}
-
-export function importProgress(text) {
+export function parseImport(text) {
   const parsed = JSON.parse(text);
-  const incoming = parsed.state || parsed;
-  const next = defaultState();
-  if (Array.isArray(incoming.earned)) next.earned = incoming.earned.filter((n) => Number.isInteger(n));
-  if (incoming.counts && typeof incoming.counts === 'object') next.counts = incoming.counts;
-  if (incoming.notes && typeof incoming.notes === 'object') next.notes = incoming.notes;
-  if (typeof incoming.spoiler === 'boolean') next.spoiler = incoming.spoiler;
-  saveState(next);
-  return next;
+  if (!parsed || typeof parsed !== 'object') throw new Error('not an object');
+  const state = blankState();
+  if (parsed.earned) state.earned = parsed.earned;
+  if (parsed.counters) state.counters = parsed.counters;
+  if (parsed.notes) state.notes = parsed.notes;
+  if (typeof parsed.spoiler === 'boolean') state.spoiler = parsed.spoiler;
+  return state;
+}
+
+export function importSummary(state) {
+  const counters = Object.keys(state.counters).length;
+  const notes = Object.keys(state.notes).filter((k) => state.notes[k]).length;
+  return 'Imported: ' + earnedCount(state) + ' of 55 earned, ' + counters + ' counters, ' + notes + ' notes restored.';
 }

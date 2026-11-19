@@ -3,46 +3,63 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sunset Platinum — GTA VI Trophy Guide</title>
+<title>Sunset Platinum — GTA 6 Trophy Guide</title>
 <link rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" href="css/theme.css">
 </head>
 <body>
 <header class="masthead">
-  <div class="mast-title">
-    <h1>SUNSET PLATINUM</h1>
-    <p class="subtitle">Grand Theft Auto VI — trophy guide &amp; tracker · PlayStation 5</p>
-    <p class="composition">55 TROPHIES · 1 PLATINUM · 2 GOLD · 6 SILVER · 46 BRONZE · 0 ONLINE</p>
+  <div class="masthead-text">
+    <p class="kicker">Grand Theft Auto VI &middot; PlayStation 5</p>
+    <h1>Sunset Platinum</h1>
+    <p class="sub">The offline trophy guide and tracker for all 55 trophies &mdash; checklist, roadmap, missables and a smart next-up plan.</p>
+    <p class="makeup">55 TROPHIES &middot; 1 PLATINUM &middot; 2 GOLD &middot; 6 SILVER &middot; 46 BRONZE</p>
   </div>
-  <div class="mast-progress">
-    <div class="big-progress"><span id="progressCount">0/55</span><span id="progressPct">0%</span></div>
-    <div class="progress-bar"><div id="progressFill"></div></div>
-    <p class="progress-note" id="progressNote">Road to the platinum</p>
+  <div class="big-progress" id="bigProgress">
+    <span class="big-count" id="progressCount">0/55</span>
+    <span class="big-label">earned</span>
+    <span class="big-pct" id="progressPct">0%</span>
+    <div class="big-bar"><span id="progressBar"></span></div>
   </div>
 </header>
 <nav class="tabs" id="tabs">
-  <button type="button" data-view="checklist" class="active">Checklist</button>
-  <button type="button" data-view="roadmap">Roadmap</button>
-  <button type="button" data-view="missables">Missables</button>
-  <button type="button" data-view="planner">Next up</button>
-  <button type="button" data-view="save">Save &amp; Export</button>
+  <button type="button" class="tab active" data-tab="checklist">Checklist</button>
+  <button type="button" class="tab" data-tab="roadmap">Roadmap</button>
+  <button type="button" class="tab" data-tab="missables">Missables</button>
+  <button type="button" class="tab" data-tab="next">Next up</button>
+  <button type="button" class="tab" data-tab="save">Save &amp; Export</button>
 </nav>
-<div class="toolbar">
-  <input id="search" type="search" placeholder="Search trophies… (try “shooting”)" aria-label="Search trophies">
-  <label>Kind <select id="kindFilter">
-    <option value="all">All kinds</option><option value="story">Story</option>
-    <option value="collectibles">Collectibles</option><option value="activities">Activities</option>
-    <option value="online">Online (0)</option>
-  </select></label>
-  <label>Grade <select id="gradeFilter">
-    <option value="all">All grades</option><option value="platinum">Platinum</option>
-    <option value="gold">Gold</option><option value="silver">Silver</option><option value="bronze">Bronze</option>
-  </select></label>
-  <label class="spoiler-toggle"><input id="spoilerToggle" type="checkbox" checked> Spoiler guard: hide story trophies until earned</label>
+<div class="controls">
+  <input id="search" type="search" placeholder="Search trophies&hellip; try &ldquo;shooting&rdquo;" aria-label="Search trophies">
+  <label>Kind
+    <select id="kindFilter">
+      <option value="all">All kinds</option>
+      <option value="story">Story</option>
+      <option value="missable">Missable</option>
+      <option value="collectibles">Collectibles</option>
+      <option value="activities">Activities</option>
+      <option value="online">Online</option>
+    </select>
+  </label>
+  <label>Grade
+    <select id="gradeFilter">
+      <option value="all">All grades</option>
+      <option value="platinum">Platinum</option>
+      <option value="gold">Gold</option>
+      <option value="silver">Silver</option>
+      <option value="bronze">Bronze</option>
+    </select>
+  </label>
+  <label class="spoiler-label"><input id="spoilerToggle" type="checkbox" checked> Spoiler guard: hide story trophies until earned</label>
 </div>
-<main id="view"></main>
+<main id="view">
+  <section class="check-wrap">
+    <div id="list" class="list"></div>
+    <aside id="detail" class="detail"></aside>
+  </section>
+</main>
 <footer>
-  <p>Names, descriptions and grades: the official PSN list (Exophase · PSNProfiles). Guides are written in our own words from those descriptions — where a description does not decide the steps, the guide says so. No network: everything runs offline, progress lives in your browser.</p>
+  <p>Sources for names, descriptions, grades and PSN counts: Exophase and PSNProfiles. Guides are written for this app from the official descriptions; where a step is not yet confirmed in the game, the guide says so. Works offline &mdash; no network, no account.</p>
 </footer>
 <script type="module" src="js/main.js"></script>
 </body>
