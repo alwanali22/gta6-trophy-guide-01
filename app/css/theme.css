@@ -61,6 +61,9 @@ body { background: var(--bg); color: var(--text); }
 .next-row .rank { color: var(--amber); }
 .save-card { background: var(--panel); border: 1px solid var(--line); }
 .save-card button { background: var(--amber); color: #241505; border: none; }
+.save-card h3 { color: var(--amber); }
+.export-preview { background: #120d20; color: var(--green); border: 1px solid var(--line); }
+.import-status { color: var(--green); }
 .save-card button.danger { background: transparent; color: var(--coral); border: 1px solid var(--coral); }
 .empty { color: var(--muted); }
 footer { color: var(--muted); }

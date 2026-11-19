@@ -188,6 +188,11 @@ export function renderPlanner(doc, state, onSelect) {
   view.append(list);
 }
 
+// Last export/import feedback, kept across re-renders so the Save tab can
+// show the exported file's contents and the import result on screen.
+let lastExportText = '';
+let lastImportStatus = '';
+
 export function renderSave(doc, state, onReload) {
   const view = document.getElementById('view');
   view.replaceChildren();
@@ -198,12 +203,18 @@ export function renderSave(doc, state, onReload) {
   card.append(el('p', null, 'Progress lives in this browser (localStorage): ' + state.earned.length + ' of ' + doc.trophies.length + ' earned, ' + counts + ' counters, ' + notes + ' notes. Export a backup file, or import one to restore.'));
   const exp = el('button', null, 'Export progress (.json)');
   exp.type = 'button';
+  const preview = el('pre', 'export-preview', lastExportText || 'Click “Export progress” to preview the backup file here — the full JSON appears below, exactly as saved.');
   exp.addEventListener('click', () => {
+    lastExportText = exportProgress(state);
+    preview.textContent = lastExportText;
     const a = document.createElement('a');
-    a.href = URL.createObjectURL(new Blob([exportProgress(state)], { type: 'application/json' }));
+    a.href = URL.createObjectURL(new Blob([lastExportText], { type: 'application/json' }));
     a.download = 'sunset-platinum-progress.json';
     a.click();
   });
+  card.append(exp);
+  card.append(el('h3', null, 'EXPORT PREVIEW'));
+  card.append(preview);
   const impLabel = el('label', null, 'Import progress ');
   const imp = document.createElement('input');
   imp.type = 'file';
@@ -212,13 +223,18 @@ export function renderSave(doc, state, onReload) {
     const file = e.target.files[0];
     if (!file) return;
     try {
-      importProgress(await file.text());
+      const next = importProgress(await file.text());
+      lastImportStatus = 'Imported: ' + next.earned.length + ' of ' + doc.trophies.length + ' earned, ' + Object.keys(next.counts).length + ' counters, ' + Object.keys(next.notes).length + ' notes restored.';
       onReload();
     } catch {
+      lastImportStatus = 'That file is not a Sunset Platinum export.';
       alert('That file is not a Sunset Platinum export.');
+      onReload();
     }
   });
   impLabel.append(imp);
+  card.append(impLabel);
+  if (lastImportStatus) card.append(el('p', 'import-status', lastImportStatus));
   const reset = el('button', 'danger', 'Reset all progress');
   reset.type = 'button';
   reset.addEventListener('click', () => {
@@ -227,6 +243,6 @@ export function renderSave(doc, state, onReload) {
       onReload();
     }
   });
-  card.append(exp, impLabel, el('p', null, ''), reset);
+  card.append(el('p', null, ''), reset);
   view.append(card);
 }

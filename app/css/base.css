@@ -54,6 +54,9 @@ main { padding: 16px 24px 24px; }
 .next-row .rank { font-size: 20px; font-weight: 800; text-align: center; }
 .next-row .why { font-size: 13px; margin-top: 3px; }
 .save-card { max-width: 640px; padding: 16px; border-radius: 12px; }
+.save-card h3 { font-size: 12px; letter-spacing: 1px; margin: 14px 0 4px; }
+.export-preview { font-family: ui-monospace, "Cascadia Mono", Consolas, monospace; font-size: 12px; line-height: 1.4; max-height: 240px; overflow: auto; white-space: pre-wrap; word-break: break-word; padding: 10px 12px; border-radius: 8px; margin: 10px 0; }
+.import-status { font-size: 13px; font-weight: 700; margin: 8px 0; }
 .save-card button { font: inherit; font-weight: 700; padding: 8px 14px; border-radius: 6px; cursor: pointer; margin-right: 8px; }
 .empty { padding: 24px; text-align: center; font-size: 14px; }
 footer { padding: 0 24px 20px; font-size: 12px; max-width: 900px; }
