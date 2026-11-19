@@ -1,0 +1,59 @@
+/* Layout for the Sunset Platinum guide: two columns on the checklist (list + detail pane), single column on the other views. */
+* { box-sizing: border-box; }
+body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 15px; line-height: 1.45; }
+.masthead { display: flex; justify-content: space-between; gap: 24px; padding: 18px 24px 12px; flex-wrap: wrap; }
+.mast-title h1 { margin: 0; font-size: 30px; letter-spacing: 2px; }
+.subtitle { margin: 2px 0; font-size: 14px; }
+.composition { margin: 6px 0 0; font-size: 12px; letter-spacing: 1px; font-weight: 700; }
+.mast-progress { min-width: 260px; }
+.big-progress { display: flex; justify-content: space-between; font-size: 26px; font-weight: 800; }
+.progress-bar { height: 12px; border-radius: 6px; overflow: hidden; margin-top: 6px; }
+.progress-bar > div { height: 100%; }
+.progress-note { margin: 6px 0 0; font-size: 13px; }
+.tabs { display: flex; gap: 4px; padding: 0 24px; }
+.tabs button { font: inherit; font-weight: 700; padding: 9px 16px; border: 1px solid transparent; border-bottom: none; border-radius: 8px 8px 0 0; cursor: pointer; }
+.toolbar { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; padding: 10px 24px; }
+.toolbar input[type="search"] { font: inherit; padding: 7px 10px; width: 260px; border-radius: 6px; border: 1px solid; }
+.toolbar select { font: inherit; padding: 6px; border-radius: 6px; border: 1px solid; }
+.toolbar label { font-size: 13px; font-weight: 600; }
+.spoiler-toggle { margin-left: auto; }
+main { padding: 16px 24px 24px; }
+.split { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 18px; align-items: start; }
+.trophy-list { display: flex; flex-direction: column; gap: 8px; }
+.trophy-row { display: grid; grid-template-columns: 28px 34px 1fr auto; gap: 10px; align-items: start; padding: 10px 12px; border-radius: 10px; cursor: pointer; }
+.trophy-row input[type="checkbox"] { width: 20px; height: 20px; margin-top: 2px; cursor: pointer; }
+.trophy-row .tname { font-weight: 700; font-size: 15px; }
+.trophy-row .tdesc { font-size: 13px; margin-top: 2px; }
+.trophy-row .tmeta { display: flex; gap: 6px; margin-top: 5px; flex-wrap: wrap; }
+.chip { font-size: 11px; font-weight: 700; padding: 2px 7px; border-radius: 20px; letter-spacing: 0.4px; }
+.grade-badge { width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 800; }
+.detail { position: sticky; top: 12px; padding: 16px; border-radius: 12px; }
+.detail h2 { margin: 0 0 4px; font-size: 21px; }
+.detail .grade-line { font-size: 13px; font-weight: 700; letter-spacing: 0.5px; }
+.detail .official { font-size: 14px; font-style: italic; margin: 8px 0; }
+.detail h3 { font-size: 12px; letter-spacing: 1px; margin: 14px 0 4px; }
+.detail p { margin: 4px 0; font-size: 14px; }
+.detail .sources { font-size: 12px; }
+.counter-box { display: flex; gap: 8px; align-items: center; margin-top: 8px; }
+.counter-box input { width: 90px; font: inherit; padding: 5px 8px; border-radius: 6px; border: 1px solid; }
+.counter-box button { font: inherit; font-weight: 700; padding: 6px 12px; border-radius: 6px; cursor: pointer; }
+.detail textarea { width: 100%; min-height: 56px; font: inherit; font-size: 13px; padding: 7px; border-radius: 6px; border: 1px solid; resize: vertical; }
+.missable-flag { display: inline-block; font-size: 12px; font-weight: 800; padding: 3px 9px; border-radius: 20px; margin-top: 6px; }
+.stage-card { border-radius: 12px; padding: 14px 16px; margin-bottom: 14px; }
+.stage-card h2 { margin: 0 0 2px; font-size: 18px; }
+.stage-card .stage-sub { font-size: 13px; margin: 0 0 8px; }
+.stage-list { display: flex; flex-direction: column; gap: 5px; margin-top: 10px; }
+.stage-item { display: grid; grid-template-columns: 22px 1fr auto; gap: 8px; font-size: 13px; align-items: center; }
+.stage-item input { width: 16px; height: 16px; }
+.miss-list { display: flex; flex-direction: column; gap: 10px; }
+.miss-row { padding: 12px 14px; border-radius: 10px; }
+.miss-row .tname { font-weight: 700; }
+.miss-row .basis { font-size: 13px; margin-top: 4px; }
+.next-list { display: flex; flex-direction: column; gap: 10px; }
+.next-row { display: grid; grid-template-columns: 34px 1fr auto; gap: 10px; padding: 12px 14px; border-radius: 10px; align-items: start; cursor: pointer; }
+.next-row .rank { font-size: 20px; font-weight: 800; text-align: center; }
+.next-row .why { font-size: 13px; margin-top: 3px; }
+.save-card { max-width: 640px; padding: 16px; border-radius: 12px; }
+.save-card button { font: inherit; font-weight: 700; padding: 8px 14px; border-radius: 6px; cursor: pointer; margin-right: 8px; }
+.empty { padding: 24px; text-align: center; font-size: 14px; }
+footer { padding: 0 24px 20px; font-size: 12px; max-width: 900px; }
