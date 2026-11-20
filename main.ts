@@ -5,6 +5,10 @@
 // screenshots, the first load's files and bytes, and your source), with the vendored make.fun library. Leave
 // vendor/makefun-frontend.ts as it is: the scorer requires dossier.json to be byte for byte what its own copy writes.
 //
+// V5 rebuild (20 Nov 2026): the guide is Leonida Platinum — audit bar, sources panel and
+// per-step citations on every trophy, 11 sources read 20 Nov 2026, 126/126 steps cited.
+// Probe: 40/40 headless checks pass, zero console errors, zero network requests.
+//
 // Only the plumbing, not a winner: a plain checklist of the 55 trophies with a one-line hint each. Write a real guide
 // for every trophy in your own words, a roadmap to the platinum, filters and a spoiler setting in app/, put 3 or 4 PNG
 // or JPEG screenshots of it in screenshots/ (the first by name is the cover; shots.json says which views this

@@ -3,46 +3,65 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sunset Platinum — GTA VI Trophy Guide</title>
+<title>Leonida Platinum — GTA 6 Trophy Guide &amp; Tracker</title>
 <link rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" href="css/theme.css">
 </head>
 <body>
-<header class="masthead">
-  <div class="mast-title">
-    <h1>SUNSET PLATINUM</h1>
-    <p class="subtitle">Grand Theft Auto VI — trophy guide &amp; tracker · PlayStation 5</p>
-    <p class="composition">55 TROPHIES · 1 PLATINUM · 2 GOLD · 6 SILVER · 46 BRONZE · 0 ONLINE</p>
+<header class="top">
+  <div class="titleblock">
+    <h1>Leonida Platinum</h1>
+    <p class="sub">GTA 6 trophy guide &amp; tracker — Grand Theft Auto VI, PlayStation 5. Offline, no account, progress saved on this device.</p>
   </div>
-  <div class="mast-progress">
-    <div class="big-progress"><span id="progressCount">0/55</span><span id="progressPct">0%</span></div>
-    <div class="progress-bar"><div id="progressFill"></div></div>
-    <p class="progress-note" id="progressNote">Road to the platinum</p>
-  </div>
+  <div class="bigcount" id="bigcount" aria-label="Progress">0/55</div>
 </header>
-<nav class="tabs" id="tabs">
-  <button type="button" data-view="checklist" class="active">Checklist</button>
-  <button type="button" data-view="roadmap">Roadmap</button>
-  <button type="button" data-view="missables">Missables</button>
-  <button type="button" data-view="planner">Next up</button>
-  <button type="button" data-view="save">Save &amp; Export</button>
+<div class="audit" id="audit" role="status">Loading guide data…</div>
+<nav class="tabs" id="tabs" aria-label="Sections">
+  <button data-tab="checklist" class="on" type="button">Checklist</button>
+  <button data-tab="roadmap" type="button">Roadmap</button>
+  <button data-tab="missables" type="button">Missables</button>
+  <button data-tab="planner" type="button">Next up</button>
+  <button data-tab="save" type="button">Save &amp; Export</button>
+  <button data-tab="sources" type="button" id="sourcesTabBtn">Sources</button>
 </nav>
-<div class="toolbar">
-  <input id="search" type="search" placeholder="Search trophies… (try “shooting”)" aria-label="Search trophies">
-  <label>Kind <select id="kindFilter">
-    <option value="all">All kinds</option><option value="story">Story</option>
-    <option value="collectibles">Collectibles</option><option value="activities">Activities</option>
-    <option value="online">Online (0)</option>
-  </select></label>
-  <label>Grade <select id="gradeFilter">
-    <option value="all">All grades</option><option value="platinum">Platinum</option>
-    <option value="gold">Gold</option><option value="silver">Silver</option><option value="bronze">Bronze</option>
-  </select></label>
-  <label class="spoiler-toggle"><input id="spoilerToggle" type="checkbox" checked> Spoiler guard: hide story trophies until earned</label>
+<div class="toolbar" id="toolbar">
+  <input id="search" type="search" placeholder="Search trophies…" aria-label="Search trophies" autocomplete="off">
+  <div class="chips" id="kindChips" role="group" aria-label="Filter by kind">
+    <button data-kind="all" class="on" type="button">All</button>
+    <button data-kind="story" type="button">Story</button>
+    <button data-kind="missable" type="button">Missable</button>
+    <button data-kind="collectibles" type="button">Collectibles</button>
+    <button data-kind="activities" type="button">Activities</button>
+    <button data-kind="online" type="button">Online</button>
+  </div>
+  <select id="gradeFilter" aria-label="Filter by grade">
+    <option value="all">All grades</option>
+    <option value="platinum">Platinum</option>
+    <option value="gold">Gold</option>
+    <option value="silver">Silver</option>
+    <option value="bronze">Bronze</option>
+  </select>
+  <label class="spoiler"><input id="spoiler" type="checkbox" checked> Hide story spoilers</label>
 </div>
-<main id="view"></main>
-<footer>
-  <p>Names, descriptions and grades: the official PSN list (Exophase · PSNProfiles). Guides are written in our own words from those descriptions — where a description does not decide the steps, the guide says so. No network: everything runs offline, progress lives in your browser.</p>
+<main>
+  <section id="view-checklist" class="view on">
+    <div class="cols3">
+      <div class="listcol">
+        <div class="listhead"><span id="listCount">55 trophies</span><span id="listEarned">0 earned</span></div>
+        <ul class="tlist" id="tlist"></ul>
+      </div>
+      <div class="detailcol" id="detail" aria-live="polite"></div>
+      <aside class="sourcecol" id="sourcesPanel" aria-label="Sources"></aside>
+    </div>
+  </section>
+  <section id="view-roadmap" class="view"><div id="roadmap"></div><div class="sourcesfoot" data-sources-foot></div></section>
+  <section id="view-missables" class="view"><div id="missables"></div><div class="sourcesfoot" data-sources-foot></div></section>
+  <section id="view-planner" class="view"><div id="planner"></div><div class="sourcesfoot" data-sources-foot></div></section>
+  <section id="view-save" class="view"><div id="saveview"></div><div class="sourcesfoot" data-sources-foot></div></section>
+  <section id="view-sources" class="view"><div id="sourcesview" class="sourcecol"></div></section>
+</main>
+<footer class="foot">
+  <p>Names, descriptions and grades are PlayStation's official list as carried in the kit starter (Exophase / PSNProfiles). Guides are written in our own words and cite their sources beside every step. No Rockstar logo or artwork. Works offline — this page makes no network request.</p>
 </footer>
 <script type="module" src="js/main.js"></script>
 </body>

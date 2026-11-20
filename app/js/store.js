@@ -1,70 +1,56 @@
-// Progress state in localStorage: earned ids, per-trophy counters, per-trophy notes, spoiler setting.
-export const STATE_KEY = 'sunset-platinum-v1';
+// Progress saved in the browser (localStorage) plus export / import.
+// Nothing leaves the device except the file the reader chooses to download.
+export const STORAGE_KEY = 'gta6-guide-v5';
 
-export function defaultState() {
-  return { earned: [], counts: {}, notes: {}, spoiler: true };
+export function defaultProgress() {
+  return { earned: {}, counters: {}, notes: {}, spoiler: true };
 }
 
-export function loadState() {
+export function loadProgress() {
   try {
-    const raw = localStorage.getItem(STATE_KEY);
-    if (!raw) return defaultState();
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return defaultProgress();
     const parsed = JSON.parse(raw);
-    return {
-      earned: Array.isArray(parsed.earned) ? parsed.earned : [],
-      counts: parsed.counts && typeof parsed.counts === 'object' ? parsed.counts : {},
-      notes: parsed.notes && typeof parsed.notes === 'object' ? parsed.notes : {},
-      spoiler: parsed.spoiler !== false,
-    };
+    return { ...defaultProgress(), ...parsed };
   } catch {
-    return defaultState();
+    return defaultProgress();
   }
 }
 
-export function saveState(state) {
-  localStorage.setItem(STATE_KEY, JSON.stringify(state));
+export function saveProgress(state) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
 }
 
-export function isEarned(state, id) {
-  return state.earned.includes(id);
+export function exportProgressText(state) {
+  return JSON.stringify({ app: 'leonida-platinum-gta6', version: 1, exported: new Date().toISOString(), progress: state }, null, 2);
 }
 
-export function toggleEarned(state, id) {
-  const at = state.earned.indexOf(id);
-  if (at === -1) state.earned.push(id);
-  else state.earned.splice(at, 1);
-  saveState(state);
+export function downloadExport(state) {
+  const blob = new Blob([exportProgressText(state)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'gta6-trophy-progress.json';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
 }
 
-export function setCount(state, id, value) {
-  const n = Math.max(0, Math.floor(Number(value) || 0));
-  state.counts[id] = n;
-  saveState(state);
-  return n;
-}
-
-export function getCount(state, id) {
-  return state.counts[id] || 0;
-}
-
-export function setNote(state, id, text) {
-  if (text.trim()) state.notes[id] = text.trim();
-  else delete state.notes[id];
-  saveState(state);
-}
-
-export function exportProgress(state) {
-  return JSON.stringify({ app: 'sunset-platinum', version: 1, exportedAt: new Date().toISOString(), state }, null, 2);
-}
-
-export function importProgress(text) {
-  const parsed = JSON.parse(text);
-  const incoming = parsed.state || parsed;
-  const next = defaultState();
-  if (Array.isArray(incoming.earned)) next.earned = incoming.earned.filter((n) => Number.isInteger(n));
-  if (incoming.counts && typeof incoming.counts === 'object') next.counts = incoming.counts;
-  if (incoming.notes && typeof incoming.notes === 'object') next.notes = incoming.notes;
-  if (typeof incoming.spoiler === 'boolean') next.spoiler = incoming.spoiler;
-  saveState(next);
-  return next;
+export function importProgressText(text) {
+  let parsed;
+  try {
+    parsed = JSON.parse(text);
+  } catch {
+    return { ok: false, error: 'That file is not valid JSON.' };
+  }
+  const progress = parsed.progress || parsed;
+  if (typeof progress !== 'object' || progress === null) {
+    return { ok: false, error: 'That file holds no progress to import.' };
+  }
+  const state = { ...defaultProgress(), ...progress };
+  if (typeof state.earned !== 'object') state.earned = {};
+  if (typeof state.counters !== 'object') state.counters = {};
+  if (typeof state.notes !== 'object') state.notes = {};
+  return { ok: true, state };
 }
