@@ -4,7 +4,7 @@
 import { loadGuideData, computeAudit, auditLine } from './data.js';
 import { loadProgress, saveProgress, downloadExport, exportProgressText, importProgressText } from './store.js';
 import { applyTrophyFilters, planNextUp } from './filters.js';
-import { renderSourcesPanel, renderSourcesFoot, renderChecklist, renderDetail, renderRoadmap, renderMissables, renderPlanner, renderSave } from './views.js';
+import { renderSourcesPanel, renderSourcesFoot, renderChecklist, renderDetail, renderRoadmap, renderMissables, renderPlanner, renderSave, renderMatrix } from './views.js';
 
 const state = loadProgress();
 let trophies = [];
@@ -30,6 +30,7 @@ function renderAll() {
   renderMissables($('missables'), trophies);
   renderPlanner($('planner'), planNextUp(trophies, state));
   renderSave($('saveview'), state, trophies);
+  renderMatrix($('matrixview'), trophies, sources, audit.citedBy, state);
   const preview = $('exportPreview');
   if (preview) preview.value = exportProgressText(state);
 }

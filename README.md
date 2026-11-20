@@ -18,6 +18,8 @@ Grand Theft Auto VI (1 platinum, 2 gold, 6 silver, 46 bronze, 28 hidden). Built 
   20 Nov 2026 · 1 possibly missable · 2 watch · 8 unconfirmed · 22 single-source · 6 disagree.
 - **Sources panel** — every source actually read, numbered, with its title, URL, read date
   and how many of the 55 guides cite it.
+- **Source matrix** — a 55 × 11 table: which sources cite each trophy's guide, with a
+  "cited by X of 55" total row, computed from the guide data, scrollable on a phone.
 - **Roadmap** — 5 stages to the platinum, each with a progress bar and checklist.
 - **Missables** — the possibly-missable trophy, the watch list, the unconfirmed steps and
   the places where the sources disagree, each with its basis shown.

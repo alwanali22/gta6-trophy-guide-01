@@ -151,3 +151,19 @@ export function renderSave(el, state, trophies) {
     `<textarea class="export" id="exportPreview" readonly></textarea>` +
     `<p><label>Import a file: <input type="file" id="importFile" accept="application/json,.json"></label></p></div></div>`;
 }
+
+export function renderMatrix(el, trophies, sources, citedBy, state) {
+  const head = sources.map((s) => `<th scope="col" title="${escapeHtml(s.name)} — ${escapeHtml(s.title)}">[${s.n}]</th>`).join('');
+  const rows = trophies.map((t) => {
+    const cells = sources.map((s) => {
+      const cited = (t.sources || []).includes(s.n);
+      return `<td class="${cited ? 'yes' : 'no'}">${cited ? '✓' : '–'}</td>`;
+    }).join('');
+    return `<tr><th scope="row">${escapeHtml(displayName(t, state))} ${gradeBadge(t.grade)}</th>${cells}</tr>`;
+  }).join('');
+  const totals = sources.map((s) => `<td><b>cited by ${citedBy.get(s.n) || 0} of 55</b></td>`).join('');
+  el.innerHTML = `<h2 style="font-family:Georgia,Palatino,serif">Source matrix</h2>` +
+    `<p>Which sources cite each trophy's guide — computed from the guide data, never hand-written. A checkmark means that source is cited by that trophy's guide; the total row gives the same "cited by X of 55" count as the sources panel. Story names follow the spoiler setting.</p>` +
+    `<div class="matrixwrap"><table class="matrix"><thead><tr><th scope="col">Trophy</th>${head}</tr></thead>` +
+    `<tbody>${rows}</tbody><tfoot><tr><th scope="row">Total</th>${totals}</tr></tfoot></table></div>`;
+}

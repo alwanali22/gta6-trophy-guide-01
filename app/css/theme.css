@@ -30,4 +30,11 @@ button.act{background:var(--accent);border-color:var(--accent);color:#241207;fon
 button.act.ghost{background:transparent;color:var(--text);border-color:var(--line);font-weight:400}
 .status.ok{color:var(--good)}
 .status.bad{color:#ff9d9d}
+.matrixwrap{background:var(--panel);border:1px solid var(--line)}
+.matrix th,.matrix td{border-bottom:1px solid var(--line)}
+.matrix thead th{background:var(--panel2);color:var(--text)}
+.matrix th[scope=row]{color:var(--text)}
+.matrix td.yes{color:var(--good)}
+.matrix td.no{color:var(--muted)}
+.matrix tfoot td,.matrix tfoot th{color:var(--accent)}
 ::placeholder{color:#8f84a8}

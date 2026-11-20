@@ -62,5 +62,13 @@ textarea.export{width:100%;min-height:170px;font-family:ui-monospace,Menlo,monos
 button.act{border:1px solid;padding:8px 14px;border-radius:8px;font-size:14px;cursor:pointer;margin:4px 6px 4px 0}
 .status{font-size:13.5px;margin-top:8px}
 .foot{padding:0 18px 18px;font-size:12.5px;max-width:900px}
+.matrixwrap{overflow:auto;max-height:640px;border-radius:12px}
+table.matrix{border-collapse:collapse;font-size:13px;min-width:760px}
+.matrix th,.matrix td{padding:6px 8px;text-align:center;white-space:nowrap}
+.matrix th[scope=row],.matrix td:first-child{text-align:left}
+.matrix th[scope=row]{font-weight:600}
+.matrix thead th{position:sticky;top:0}
+.matrix td.yes{font-weight:800}
+.matrix tfoot td{font-size:11.5px}
 @media (max-width:1000px){.cols3{grid-template-columns:1fr 1fr}.sourcecol{grid-column:1/-1}.savegrid{grid-template-columns:1fr}}
 @media (max-width:640px){.cols3{grid-template-columns:1fr}.stage ul{columns:1}.bigcount{font-size:26px}h1{font-size:24px}}
